@@ -37,4 +37,4 @@ def getAssetByID():
 
     # print(f'Value: {user_id}')
     # print(request.args.get('username'))
-    return 'good db connected'
+    return connectionstring
