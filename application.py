@@ -22,8 +22,9 @@ def getAssetByID():
     driver = '{ODBC Driver 17 for SQL Server}'
     # connectionstring = f'DRIVER={driver};SERVER={server};PORT={port};DATABASE={database};UID={username};PWD={password}'
     # connectionstring = f'DRIVER={driver};SERVER={server};PORT={port};DATABASE={database};UID={username};PWD={password}'
-    connectionstring=os.getenv('mdpappdb')
-    connectionstring=os.getenv('SQLAZURECONNSTR_mdpappdb')
+     #connectionstring=os.environ['SQLAZURECONNSTR_mdpappdb'] #os.getenv('mdpappdb')
+    connectionstring=os.environ['mdpappdb']
+    # connectionstring=os.getenv('SQLAZURECONNSTR_mdpappdb')
     print('connectionstring')
     #print(os.getenv('SQLAZURECONNSTR_sqldbcon'))
     connection = pyodbc.connect(connectionstring)  
