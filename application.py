@@ -20,8 +20,11 @@ def getAssetByID(asset_id=None):
     port = 1433
     driver = '{ODBC Driver 13 for SQL Server}'
     connectionstring = f'DRIVER={driver};SERVER={server};PORT={port};DATABASE={database};UID={username};PWD={password}'
-    connection = db.connect(connectionstring)   
+    print(connectionstring)
+    connection = db.connect(connectionstring)  
+    print(connection) 
     cursor=connection.cursor()
+    print (cursor)
     cursor.execute(
         'SELECT Id,FullName, UserName, Email, Password, Avatar FROM [TechnologyApp].[Users]')
     row = cursor.fetchone()
