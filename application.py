@@ -23,7 +23,7 @@ def getAssetByID():
     # connectionstring = f'DRIVER={driver};SERVER={server};PORT={port};DATABASE={database};UID={username};PWD={password}'
     # connectionstring = f'DRIVER={driver};SERVER={server};PORT={port};DATABASE={database};UID={username};PWD={password}'
      #connectionstring=os.environ['SQLAZURECONNSTR_mdpappdb'] #os.getenv('mdpappdb')
-    connectionstring=os.environ['mdpappdb']
+    connectionstring=os.environ['SQLAZURECONNSTR_mdpappdb']
     # connectionstring=os.getenv('SQLAZURECONNSTR_mdpappdb')
     print('connectionstring')
     #print(os.getenv('SQLAZURECONNSTR_sqldbcon'))
