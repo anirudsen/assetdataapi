@@ -1,4 +1,3 @@
-import pyodbc  as db
 import os
 from flask import Flask, request,  jsonify
 from flask_restful import Api, marshal
@@ -29,8 +28,8 @@ def getAssetByID():
     # connectionstring=os.getenv('SQLAZURECONNSTR_mdppip freappdb')
     #print('connectionstring')
     #print(os.getenv('SQLAZURECONNSTR_sqldbcon'))
-    import pymssql
-    connection = pymssql.connect(connectionstring)  
+    from sqlalchemy import create_engine
+    engine = create_engine(connectionstring) 
    # print('connection') 
    # print(connection) 
     #cursor=connection.cursor()
@@ -40,4 +39,4 @@ def getAssetByID():
 
     # print(f'Value: {user_id}')
     # print(request.args.get('username'))
-    return connection
+    return engine
