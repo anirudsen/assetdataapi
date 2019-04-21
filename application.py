@@ -5,7 +5,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 
 
-@app.route('/asset')
+@app.route('/assets')
 def getwelcomeMsg():
     return 'Asset API'
 
