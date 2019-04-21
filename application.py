@@ -5,12 +5,12 @@ from flask_cors import CORS
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/asset')
 def getwelcomeMsg():
     return 'Asset API'
 
-    
-@app.route('/asset')
+
+
 @app.route('/asset/<asset_id>')
 def getAssetByID(asset_id=None):
     server = 'mdpsqldbserverdev.database.windows.net'
