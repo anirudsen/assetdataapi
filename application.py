@@ -11,8 +11,8 @@ def getwelcomeMsg():
 
 
 
-@app.route('/asset/<asset_id>')
-def getAssetByID(asset_id=None):
+@app.route('/asset')
+def getAssetByID():
     server = 'mdpsqldbserverdev.database.windows.net'
     database = 'mdpappdb'
     username = 'mdpadmin'
