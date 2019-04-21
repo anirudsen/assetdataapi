@@ -1,4 +1,5 @@
-import pyodbc as db
+import pyodbc 
+import os
 from flask import Flask, request,  jsonify
 from flask_restful import Api, marshal
 from flask_cors import CORS
@@ -19,11 +20,14 @@ def getAssetByID():
     password = 'Robo#2010'
     port = 1433
     driver = '{ODBC Driver 13 for SQL Server}'
-    connectionstring = f'DRIVER={driver};SERVER={server};PORT={port};DATABASE={database};UID={username};PWD={password}'
+    # connectionstring = f'DRIVER={driver};SERVER={server};PORT={port};DATABASE={database};UID={username};PWD={password}'
+    connectionstring=os.getenv('SQLAZURECONNSTR_sqldbcon')
     print(connectionstring)
-    connection = db.connect(connectionstring)  
+    connection = pyodbc.connect(connectionstring)  
+    print('connection') 
     print(connection) 
     cursor=connection.cursor()
+    print ('cursor')
     print (cursor)
     cursor.execute(
         'SELECT Id,FullName, UserName, Email, Password, Avatar FROM [TechnologyApp].[Users]')
