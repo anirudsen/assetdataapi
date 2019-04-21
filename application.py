@@ -25,14 +25,14 @@ def getAssetByID():
      #connectionstring=os.environ['SQLAZURECONNSTR_mdpappdb'] #os.getenv('mdpappdb')
     connectionstring=os.environ['SQLAZURECONNSTR_mdpappdb']
     # connectionstring=os.getenv('SQLAZURECONNSTR_mdpappdb')
-    print('connectionstring')
+    #print('connectionstring')
     #print(os.getenv('SQLAZURECONNSTR_sqldbcon'))
-    connection = pyodbc.connect(connectionstring)  
-    print('connection') 
-    print(connection) 
-    cursor=connection.cursor()
-    print ('cursor')
-    print (cursor)
+    #connection = pyodbc.connect(connectionstring)  
+   # print('connection') 
+   # print(connection) 
+    #cursor=connection.cursor()
+    #print ('cursor')
+   # print (cursor)
     
 
     # print(f'Value: {user_id}')
