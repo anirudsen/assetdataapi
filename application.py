@@ -19,11 +19,13 @@ def getAssetByID():
     username = 'mdpadmin'
     password = 'Robo#2010'
     port = 1433 
-    driver = '{ODBC Driver 13 for SQL Server}'
+    driver = '{ODBC Driver 17 for SQL Server}'
     # connectionstring = f'DRIVER={driver};SERVER={server};PORT={port};DATABASE={database};UID={username};PWD={password}'
-    connectionstring=os.getenv('SQLAZURECONNSTR_sqldbcon')
+    # connectionstring = f'DRIVER={driver};SERVER={server};PORT={port};DATABASE={database};UID={username};PWD={password}'
+    connectionstring=os.getenv('mdpappdb')
+    connectionstring=os.getenv('SQLAZURECONNSTR_mdpappdb')
     print('connectionstring')
-    print(os.getenv('SQLAZURECONNSTR_sqldbcon'))
+    #print(os.getenv('SQLAZURECONNSTR_sqldbcon'))
     connection = pyodbc.connect(connectionstring)  
     print('connection') 
     print(connection) 
