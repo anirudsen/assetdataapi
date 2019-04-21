@@ -23,11 +23,14 @@ def getAssetByID():
     # connectionstring = f'DRIVER={driver};SERVER={server};PORT={port};DATABASE={database};UID={username};PWD={password}'
     # connectionstring = f'DRIVER={driver};SERVER={server};PORT={port};DATABASE={database};UID={username};PWD={password}'
      #connectionstring=os.environ['SQLAZURECONNSTR_mdpappdb'] #os.getenv('mdpappdb')
-    connectionstring=os.environ['SQLAZURECONNSTR_mdpappdb']
-    # connectionstring=os.getenv('SQLAZURECONNSTR_mdpappdb')
+     # mssql+pymssql://dbadmin@nedomkulltest:password@nedomkulltest.database.windows.net:1433/exampledb
+    # connectionstring=os.environ['SQLAZURECONNSTR_mdpappdb']
+    connectionstring='mssql+pymssql://mdpadmin@mdpsqldbserverdev:Robo#2010@mdpsqldbserverdev.database.windows.net:1433/mdpappdb'
+    # connectionstring=os.getenv('SQLAZURECONNSTR_mdppip freappdb')
     #print('connectionstring')
     #print(os.getenv('SQLAZURECONNSTR_sqldbcon'))
-    connection = db.connect(connectionstring)  
+    import pymssql
+    connection = pymssql.connect(connectionstring)  
    # print('connection') 
    # print(connection) 
     #cursor=connection.cursor()
