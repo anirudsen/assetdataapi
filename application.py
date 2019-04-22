@@ -1,4 +1,5 @@
 import os
+import pymssql
 from flask import Flask, request,  jsonify
 from flask_restful import Api, marshal
 from flask_cors import CORS
@@ -34,8 +35,16 @@ def getAssetByID():
     #print(os.getenv('SQLAZURECONNSTR_sqldbcon'))
     from sqlalchemy import create_engine
     engine = create_engine(connectionstring) 
+    conn = pymssql.connect(
+    server="mdpsqldbserverdev.database.windows.net",
+    port=1433,
+    user= "mdpadmin",
+    password="Robo#2010",
+    database="mdpappdb")
+    cursor = conn.cursor()
+    cursor.execute(sql_query)
     #sql_query ='SELECT * FROM Asset'
-    results = engine.execute(sql_query)
+    #results = engine.execute(sql_query)
     #for r in results:
     # print(r)
    # print('connection') 
