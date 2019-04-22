@@ -38,7 +38,7 @@ def getAssetByID():
     # connectionstring=os.getenv('SQLAZURECONNSTR_mdppip freappdb')
     #print('connectionstring')
     #print(os.getenv('SQLAZURECONNSTR_sqldbcon'))
-    pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=mdpsqldbserverdev.database.windows.net;DATABASE=mdpappdb;UID=mdpadmin;PWD=Robo#2010')
+    pyodbc.connect('DRIVER=ODBC Driver 17 for SQL Server;SERVER=mdpsqldbserverdev.database.windows.net;DATABASE=mdpappdb;UID=mdpadmin;PWD=Robo#2010')
     from sqlalchemy import create_engine
     engine = create_engine(connection_string) 
 
