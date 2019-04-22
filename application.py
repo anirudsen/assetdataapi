@@ -14,27 +14,31 @@ def getwelcomeMsg():
 
 @app.route('/asset')
 def getAssetByID():
-    server = 'mdpsqldbserverdev.database.windows.net'
-    database = 'mdpappdb'
-    username = 'mdpadmin'
-    password = 'Robo#2010'
-    port = 1433 
-    driver = '{ODBC Driver 17 for SQL Server}'
+    mssql_host = 'mdpsqldbserverdev.database.windows.net'
+    mssql_db = 'mdpappdb'
+    mssql_user = 'mdpadmin'
+    mssql_pwd = 'Robo#2010'
+    mssql_port = 1433 
+    mssql_driver = 'pymssql'
+    database_server_name = 'mdpsqldbserverdev'
     # connectionstring = f'DRIVER={driver};SERVER={server};PORT={port};DATABASE={database};UID={username};PWD={password}'
     # connectionstring = f'DRIVER={driver};SERVER={server};PORT={port};DATABASE={database};UID={username};PWD={password}'
      #connectionstring=os.environ['SQLAZURECONNSTR_mdpappdb'] #os.getenv('mdpappdb')
      # mssql+pymssql://dbadmin@nedomkulltest:password@nedomkulltest.database.windows.net:1433/exampledb
     # connectionstring=os.environ['SQLAZURECONNSTR_mdpappdb']
-    connectionstring='mssql+pymssql://mdpadmin:Robo#2010@mdpsqldbserverdev.database.windows.net:1433/mdpappdb'
+    #connectionstring='mssql+pymssql://mdpadmin:Robo#2010@mdpsqldbserverdev.database.windows.net:1433/mdpappdb'
     sql_query = """
     SELECT *
     FROM Asset;
     """
+    connection_string = 'mssql+{0}://{1}:{2}@{3}:{4}/{5}'.format(
+        mssql_driver, '{0}@{1}'.format(mssql_user, database_server_name),
+        mssql_pwd, mssql_host, mssql_port, mssql_db)
     # connectionstring=os.getenv('SQLAZURECONNSTR_mdppip freappdb')
     #print('connectionstring')
     #print(os.getenv('SQLAZURECONNSTR_sqldbcon'))
     from sqlalchemy import create_engine
-    engine = create_engine(connectionstring) 
+    engine = create_engine(connection_string) 
     conn = pymssql.connect(
     server="mdpsqldbserverdev.database.windows.net",
     port=1433,
@@ -44,7 +48,7 @@ def getAssetByID():
     cursor = conn.cursor()
     cursor.execute(sql_query)
     #sql_query ='SELECT * FROM Asset'
-    #results = engine.execute(sql_query)
+    results = engine.execute(sql_query)
     #for r in results:
     # print(r)
    # print('connection') 
