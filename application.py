@@ -12,7 +12,7 @@ def getwelcomeMsg():
 
 
 
-@app.route('/asset')
+@app.route('/asset01')
 def getAssetByID():
     mssql_host = 'mdpsqldbserverdev.database.windows.net'
     mssql_db = 'mdpappdb'
@@ -39,14 +39,14 @@ def getAssetByID():
     #print(os.getenv('SQLAZURECONNSTR_sqldbcon'))
     from sqlalchemy import create_engine
     engine = create_engine(connection_string) 
-    conn = pymssql.connect(
-    server="mdpsqldbserverdev.database.windows.net",
-    port=1433,
-    user= "mdpadmin",
-    password="Robo#2010",
-    database="mdpappdb")
-    cursor = conn.cursor()
-    cursor.execute(sql_query)
+    #conn = pymssql.connect(
+    #server="mdpsqldbserverdev.database.windows.net",
+    #port=1433,
+    #user= "mdpadmin",
+    #password="Robo#2010",
+    #database="mdpappdb")
+    #cursor = conn.cursor()
+    #cursor.execute(sql_query)
     #sql_query ='SELECT * FROM Asset'
     results = engine.execute(sql_query)
     #for r in results:
