@@ -31,7 +31,13 @@ def getAssetByID():
     from sqlalchemy import create_engine
     engine = create_engine(connectionstring) 
     #sql_query ='SELECT * FROM Asset'
-    # results = engine.execute(sql_query)
+    
+     
+    sql_query = """
+               SELECT *
+               FROM Asset;
+     """
+     results = engine.execute(sql_query)
     #for r in results:
     # print(r)
    # print('connection') 
@@ -43,4 +49,4 @@ def getAssetByID():
 
     # print(f'Value: {user_id}')
     # print(request.args.get('username'))
-    return 'hello'
+    return results
