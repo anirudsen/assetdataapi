@@ -25,19 +25,17 @@ def getAssetByID():
      # mssql+pymssql://dbadmin@nedomkulltest:password@nedomkulltest.database.windows.net:1433/exampledb
     # connectionstring=os.environ['SQLAZURECONNSTR_mdpappdb']
     connectionstring='mssql+pymssql://mdpadmin:Robo#2010@mdpsqldbserverdev.database.windows.net:1433/mdpappdb'
+    sql_query = """
+    SELECT *
+    FROM Asset;
+    """
     # connectionstring=os.getenv('SQLAZURECONNSTR_mdppip freappdb')
     #print('connectionstring')
     #print(os.getenv('SQLAZURECONNSTR_sqldbcon'))
     from sqlalchemy import create_engine
     engine = create_engine(connectionstring) 
     #sql_query ='SELECT * FROM Asset'
-    
-     
-    sql_query = """
-               SELECT *
-               FROM Asset;
-     """
-     results = engine.execute(sql_query)
+    results = engine.execute(sql_query)
     #for r in results:
     # print(r)
    # print('connection') 
