@@ -30,10 +30,10 @@ def getAssetByID():
     #print(os.getenv('SQLAZURECONNSTR_sqldbcon'))
     from sqlalchemy import create_engine
     engine = create_engine(connectionstring) 
-    sql_query ='SELECT * FROM Asset'
-    results = engine.execute(sql_query)
-    for r in results:
-     print(r)
+    #sql_query ='SELECT * FROM Asset'
+    # results = engine.execute(sql_query)
+    #for r in results:
+    # print(r)
    # print('connection') 
    # print(connection) 
     #cursor=connection.cursor()
@@ -43,4 +43,4 @@ def getAssetByID():
 
     # print(f'Value: {user_id}')
     # print(request.args.get('username'))
-    return r
+    return 'hello'
