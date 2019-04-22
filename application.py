@@ -1,4 +1,3 @@
-import os
 import pyodbc
 from flask import Flask, request,  jsonify
 from flask_restful import Api, marshal
@@ -22,26 +21,22 @@ def getAssetByID():
     mssql_driver = 'ODBC Driver 17 for SQL Server'
     database_server_name = 'mdpsqldbserverdev'
     dns = 'testodbc'
-     #/opt/microsoft/msodbcsql17/lib64/libmsodbcsql-17.2.so.0.1
-    # connectionstring = 'DRIVER={mssql_driver};SERVER={mssql_host};PORT={mssql_port};DATABASE={mssql_db};UID={mssql_user};PWD={mssql_pwd}'
-    # connectionstring = f'DRIVER={driver};SERVER={server};PORT={port};DATABASE={database};UID={username};PWD={password}'
-     #connectionstring=os.environ['SQLAZURECONNSTR_mdpappdb'] #os.getenv('mdpappdb')
+     
+    # import os
+    # connectionstring=os.getenv("SQLAZURECONNSTR_assetdbconn")
      # mssql+pymssql://dbadmin@nedomkulltest:password@nedomkulltest.database.windows.net:1433/exampledb
-    # connectionstring=os.environ['SQLAZURECONNSTR_mdpappdb']
+    # connString=os.environ['SQLAZURECONNSTR_assetdbconn']
+    # connectionstring=os.environ['SQLAZURECONNSTR_assetdbconn']
+
     #connectionstring='mssql+pymssql://mdpadmin:Robo#2010@mdpsqldbserverdev.database.windows.net:1433/mdpappdb'
     
-    connection_string = 'DNS+=+{0}+;+UID+={1}+;PWD+={2}+DATABASE+={3}+;'.format(
-        dns,  mssql_user, mssql_pwd, mssql_db)
+    
     # connectionstring=os.getenv('SQLAZURECONNSTR_mdppip freappdb')
     #print('connectionstring')
     #print(os.getenv('SQLAZURECONNSTR_sqldbcon'))
     
-    pyodbc.connect(connection_string)
-    #pyodbc.connect('DRIVER=ODBC Driver 17 for SQL Server;SERVER=mdpsqldbserverdev.database.windows.net;DATABASE=mdpappdb;UID=mdpadmin;PWD=Robo#2010')
-    from sqlalchemy import create_engine
-    engine = create_engine(connection_string) 
-
-    
+    pyodbc.connect('Data Source=tcp:mdpsqldbserverdev.database.windows.net,1433;Initial Catalog=mdpappdb;User ID=mdpadmin;Password=Robo#2010')
+        
     #conn = pymssql.connect(
     #server="mdpsqldbserverdev.database.windows.net",
     #port=1433,
