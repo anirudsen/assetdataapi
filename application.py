@@ -1,4 +1,4 @@
-import pyodbc
+import pymssql
 from flask import Flask, request,  jsonify
 from flask_restful import Api, marshal
 from flask_cors import CORS
@@ -19,8 +19,15 @@ def getAssetByID():
     mssql_pwd = 'Robo#2010'
     mssql_port = 1433 
     mssql_driver = 'ODBC Driver 17 for SQL Server'
-    database_server_name = 'mdpsqldbserverdev'
+    database_server_name = "mdpsqldbserverdev"
     dns = 'testodbc'
+
+    from sqlalchemy import create_engine
+
+    server_addres = database_server_name + ".database.windows.net"
+    username = "{}@{}".format(mssql_user, database_server_name)
+    arguments = dict(server=server_addres, user=username, password=mssql_pwd, database=mssql_db, charset="utf8")
+    AZURE_ENGINE = create_engine('mssql+pymssql:///', connect_args=arguments)
      
     # import os
     # connectionstring=os.getenv("SQLAZURECONNSTR_assetdbconn")
@@ -35,7 +42,7 @@ def getAssetByID():
     #print('connectionstring')
     #print(os.getenv('SQLAZURECONNSTR_sqldbcon'))
     
-    pyodbc.connect('Data Source=tcp:mdpsqldbserverdev.database.windows.net,1433;Initial Catalog=mdpappdb;User ID=mdpadmin;Password=Robo#2010')
+    #pyodbc.connect('Data Source=tcp:mdpsqldbserverdev.database.windows.net,1433;Initial Catalog=mdpappdb;User ID=mdpadmin;Password=Robo#2010')
         
     #conn = pymssql.connect(
     #server="mdpsqldbserverdev.database.windows.net",
