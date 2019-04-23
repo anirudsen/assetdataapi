@@ -29,7 +29,7 @@ def getAssetByID():
 
 
 @app.route('/asset01')
-def getAssetByID():
+def getAssetByAssets():
     mssql_host = 'tcp:mdpsqldbserverdev.database.windows.net'
     mssql_db = 'mdpappdb'
     mssql_user = 'mdpadmin'
