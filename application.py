@@ -23,6 +23,12 @@ def getAssetByID():
 
     cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+mssql_host+';DATABASE='+mssql_db+';UID='+mssql_user+';PWD='+ mssql_pwd)
     cursor = cnxn.cursor()
+    cursor.execute("SELECT @@version;") 
+    row = cursor.fetchone()
+    while row: 
+         print (row[0]) 
+         row = cursor.fetchone()
+
 
     
-    return "results"
+    return row
