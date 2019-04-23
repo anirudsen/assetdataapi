@@ -25,10 +25,10 @@ def getAssetByID():
     cursor = cnxn.cursor()
     cursor.execute("SELECT @@version;") 
     row = cursor.fetchone()
-    while row: 
-         print (row[0]) 
-         row = cursor.fetchone()
+    #while row: 
+        # print (row[0]) 
+         #row = cursor.fetchone()
 
 
     
-    return row
+    return "I am working" + row
