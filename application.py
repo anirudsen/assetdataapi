@@ -28,6 +28,7 @@ def getAssetByID():
     username = "{}@{}".format(mssql_user, database_server_name)
     arguments = dict(server=server_addres, user=username, password=mssql_pwd, database=mssql_db, charset="utf8")
     AZURE_ENGINE = create_engine('mssql+pymssql:///', connect_args=arguments)
+    AZURE_ENGINE.connect()
      
     # import os
     # connectionstring=os.getenv("SQLAZURECONNSTR_assetdbconn")
@@ -52,8 +53,8 @@ def getAssetByID():
     #database="mdpappdb")
     #cursor = conn.cursor()
     #cursor.execute(sql_query)
-    #sql_query ='SELECT * FROM Asset'
-    # results = engine.execute(sql_query)
+    sql_query ='SELECT * FROM Asset'
+    results = AZURE_ENGINE.execute(sql_query)
     #for r in results:
     # print(r)
    # print('connection') 
