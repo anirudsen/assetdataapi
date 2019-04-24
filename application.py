@@ -57,15 +57,6 @@ def getAssetByAssets():
     sql_query =  "SELECT * FROM dbo.Device_Data where Last_Update_Date='" + dateval + "';"
      #query = "SELECT personal || ' ' || family FROM Person WHERE id='" + person_id + "';"
 
-    cursor.execute(sql_query)
-    rows = cursor.fetchone()
-    objects_list = []
-    for row in rows:
-        d = collections.OrderedDict()
-        d['DerviceDataUI'] = row.Device_Data_Feed_Unique_Identifier
-        d['AssetID'] = row.Asset_Identifier
-        d['PublishID'] = row.Publisher_Identifier
-        d['LastUpdatedDate'] = row.Last_Update_Date
-        objects_list.append(d)
+   
     #while 
-    return jsonify(objects_list)
+    return jsonify(sql_query)
