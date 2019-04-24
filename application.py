@@ -56,7 +56,7 @@ def getAssetByAssets():
     date_time_obj = datetime.datetime.strptime(dateval, '%Y-%m-%d')
     sql_query =  "SELECT * FROM dbo.Device_Data WHERE Last_Update_Date ='" + dateval + "';"
     cursor.execute(sql_query)
-    rows = cursor.fetchone()
+    rows = cursor.fetchall()
     objects_list = []
     for row in rows:
         d = collections.OrderedDict()
