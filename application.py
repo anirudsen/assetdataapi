@@ -13,7 +13,7 @@ def getwelcomeMsg():
 
 
 
-@app.route('/assets')
+@app.route('/full')
 def getAssetByID():
     mssql_host = 'tcp:mdpsqldbserverdev.database.windows.net'
     mssql_db = 'mdpappdb'
@@ -23,7 +23,6 @@ def getAssetByID():
     mssql_driver = 'ODBC Driver 17 for SQL Server'
     database_server_name = "mdpsqldbserverdev"
     dns = 'testodbc'
-
     cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+mssql_host+';DATABASE='+mssql_db+';UID='+mssql_user+';PWD='+ mssql_pwd)
     cursor = cnxn.cursor()
     cursor.execute("SELECT * FROM dbo.Device_Data;") 
@@ -40,9 +39,6 @@ def getAssetByID():
     #j = json.dumps(objects_list,myconverter)
     return jsonify(objects_list)
 
-def myconverter(o):
-        if isinstance(o, datetime.datetime):
-            return o.__str__()
 
 @app.route('/asset01')
 def getAssetByAssets():
@@ -54,10 +50,19 @@ def getAssetByAssets():
     mssql_driver = 'ODBC Driver 17 for SQL Server'
     database_server_name = "mdpsqldbserverdev"
     dns = 'testodbc'
-
+    dateval = request.args.get('date', '')
     cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+mssql_host+';DATABASE='+mssql_db+';UID='+mssql_user+';PWD='+ mssql_pwd)
     cursor = cnxn.cursor()
-    cursor.execute("SELECT @@version;") 
-    row = cursor.fetchone()
+    date_time_obj = datetime.datetime.strptime(dateval, '%Y-%m-%d')
+    cursor.execute("SELECT * FROM dbo.Device_Data where Last_Update_Date=?",date_time_obj)
+    rows = cursor.fetchone()
+    objects_list = []
+    for row in rows:
+        d = collections.OrderedDict()
+        d['DerviceDataUI'] = row.Device_Data_Feed_Unique_Identifier
+        d['AssetID'] = row.Asset_Identifier
+        d['PublishID'] = row.Publisher_Identifier
+        d['LastUpdatedDate'] = row.Last_Update_Date
+        objects_list.append(d)
     #while 
-    return row[0]
+    return jsonify(objects_list)
