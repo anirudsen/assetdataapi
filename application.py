@@ -23,9 +23,9 @@ def getAssetByID():
 
     cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+mssql_host+';DATABASE='+mssql_db+';UID='+mssql_user+';PWD='+ mssql_pwd)
     cursor = cnxn.cursor()
-    cursor.execute("SELECT @@version;") 
-    row = cursor.fetchone()
-    return 'I am working'
+    cursor.execute("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = dbo.Device_Data ORDER BY ORDINAL_POSITION;") 
+    row = cursor.fetchall()
+    return row
 
 
 @app.route('/asset01')
@@ -42,5 +42,6 @@ def getAssetByAssets():
     cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+mssql_host+';DATABASE='+mssql_db+';UID='+mssql_user+';PWD='+ mssql_pwd)
     cursor = cnxn.cursor()
     cursor.execute("SELECT @@version;") 
-    row = cursor.fetchone()
+    row = cursor.fetchall()
+    #while 
     return row[0]
