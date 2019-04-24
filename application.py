@@ -23,7 +23,7 @@ def getAssetByID():
 
     cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+mssql_host+';DATABASE='+mssql_db+';UID='+mssql_user+';PWD='+ mssql_pwd)
     cursor = cnxn.cursor()
-    cursor.execute("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = Device_Data ORDER BY ORDINAL_POSITION;") 
+    cursor.execute("SELECT * FROM dbo.Device_Data;") 
     row = cursor.fetchone()
     return row[0]
 
