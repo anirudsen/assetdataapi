@@ -25,7 +25,7 @@ def getAssetByID():
     cursor = cnxn.cursor()
     cursor.execute("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = dbo.Device_Data ORDER BY ORDINAL_POSITION;") 
     row = cursor.fetchone()
-    return row
+    return row[0]
 
 
 @app.route('/asset01')
