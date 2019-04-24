@@ -57,6 +57,4 @@ def getAssetByAssets():
     sql_query =  "SELECT * FROM dbo.Device_Data where Last_Update_Date='" + dateval + "';"
      #query = "SELECT personal || ' ' || family FROM Person WHERE id='" + person_id + "';"
 
-   
-    #while 
-    return jsonify(sql_query)
+    return sql_query
