@@ -55,6 +55,17 @@ def getAssetByAssets():
     cursor = cnxn.cursor()
     date_time_obj = datetime.datetime.strptime(dateval, '%Y-%m-%d')
     sql_query =  "SELECT * FROM dbo.Device_Data WHERE Last_Update_Date ='" + dateval + "';"
+    cursor.execute(sql_query)
+    rows = cursor.fetchone()
+    objects_list = []
+    for row in rows:
+        d = collections.OrderedDict()
+        d['DerviceDataUI'] = row.Device_Data_Feed_Unique_Identifier
+        d['AssetID'] = row.Asset_Identifier
+        d['PublishID'] = row.Publisher_Identifier
+        d['LastUpdatedDate'] = row.Last_Update_Date
+        objects_list.append(d)
      #query = "SELECT personal || ' ' || family FROM Person WHERE id='" + person_id + "';"
 
-    return sql_query
+    return jsonify(objects_list)
+    
