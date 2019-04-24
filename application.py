@@ -1,4 +1,6 @@
 import pyodbc
+import collections
+import json
 from flask import Flask, request,  jsonify
 
 
@@ -24,8 +26,18 @@ def getAssetByID():
     cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+mssql_host+';DATABASE='+mssql_db+';UID='+mssql_user+';PWD='+ mssql_pwd)
     cursor = cnxn.cursor()
     cursor.execute("SELECT * FROM dbo.Device_Data;") 
-    row = cursor.fetchone()
-    return row[0]
+    rows = cursor.fetchall()
+    objects_list = []
+    for row in rows:
+        d = collections.OrderedDict()
+        d['DerviceDataUI'] = row.Device_Data_Feed_Unique_Identifier
+        d['AssetID'] = row.Asset_Identifier
+        d['PublishID'] = row.Publisher_Identifier
+        d['LastUpdatedDate'] = row.Last_Update_Date
+        objects_list.append(d)
+
+    j = json.dumps(objects_list)
+    return j
 
 
 @app.route('/asset01')
