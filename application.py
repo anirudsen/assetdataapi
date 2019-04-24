@@ -1,6 +1,7 @@
 import pyodbc
 import collections
 import json
+import datetime
 from flask import Flask, request,  jsonify
 
 
@@ -33,12 +34,15 @@ def getAssetByID():
         d['DerviceDataUI'] = row.Device_Data_Feed_Unique_Identifier
         d['AssetID'] = row.Asset_Identifier
         d['PublishID'] = row.Publisher_Identifier
-        d['LastUpdatedDate'] = row.Last_Update_Date
+        d['LastUpdatedDate'] = myconverter(row.Last_Update_Date)
         objects_list.append(d)
 
     j = json.dumps(objects_list)
     return j
 
+def myconverter(o):
+        if isinstance(o, datetime.datetime):
+            return o.__str__()
 
 @app.route('/asset01')
 def getAssetByAssets():
