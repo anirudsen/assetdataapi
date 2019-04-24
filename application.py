@@ -34,11 +34,11 @@ def getAssetByID():
         d['DerviceDataUI'] = row.Device_Data_Feed_Unique_Identifier
         d['AssetID'] = row.Asset_Identifier
         d['PublishID'] = row.Publisher_Identifier
-        d['LastUpdatedDate'] = myconverter(row.Last_Update_Date)
+        d['LastUpdatedDate'] = row.Last_Update_Date
         objects_list.append(d)
 
-    j = json.dumps(objects_list)
-    return j
+    #j = json.dumps(objects_list,myconverter)
+    return jsonify(objects_list)
 
 def myconverter(o):
         if isinstance(o, datetime.datetime):
