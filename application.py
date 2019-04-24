@@ -40,7 +40,7 @@ def getAssetByID():
     return jsonify(objects_list)
 
 
-@app.route('/asset01')
+@app.route('/incremental')
 def getAssetByAssets():
     mssql_host = 'tcp:mdpsqldbserverdev.database.windows.net'
     mssql_db = 'mdpappdb'
@@ -54,7 +54,7 @@ def getAssetByAssets():
     cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+mssql_host+';DATABASE='+mssql_db+';UID='+mssql_user+';PWD='+ mssql_pwd)
     cursor = cnxn.cursor()
     date_time_obj = datetime.datetime.strptime(dateval, '%Y-%m-%d')
-    cursor.execute("SELECT * FROM dbo.Device_Data where Last_Update_Date=?",date_time_obj)
+    cursor.execute("SELECT * FROM dbo.Device_Data where Last_Update_Date=?"(dateval))
     rows = cursor.fetchone()
     objects_list = []
     for row in rows:
