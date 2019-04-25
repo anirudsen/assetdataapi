@@ -13,7 +13,7 @@ def getwelcomeMsg():
 
 
 
-@app.route('/full')
+@app.route('/datapull')
 def getAssetByID():
     mssql_host = 'tcp:mdpsqldbserverqc.database.windows.net'
     mssql_db = 'mdp'
