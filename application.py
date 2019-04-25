@@ -18,7 +18,7 @@ def getAssetByID():
     mssql_host = 'tcp:mdpsqldbserverqc.database.windows.net'
     mssql_db = 'mdp'
     mssql_user = 'appadmin'
-    mssql_pwd = 'Robo#2010'
+    mssql_pwd = 'Robo#2010#'
     mssql_port = 1433 
     mssql_driver = 'ODBC Driver 17 for SQL Server'
     database_server_name = "mdpsqldbserverdev"
