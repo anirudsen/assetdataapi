@@ -43,10 +43,10 @@ def getData():
 		
     if filtercondition == '*' and columnname == ' ' and incrementaldate !=' ' :
 		#"SELECT * FROM dbo.Device_Data WHERE Last_Update_Date ='" + dateval + "';"
-	    sql_query = "SELECT * FROM "+ tablename +" WHERE Last_Update_Date ='" + incrementaldate + "';"
+	    sql_query = "SELECT * FROM "+ tablename +" WHERE Last_Update_Date >='" + incrementaldate + "';"
 		
     if filtercondition == ' ' and columnname != ' ' and incrementaldate !=' ':
-	    sql_query = "SELECT "+ columnname + "FROM "+ tablename +" WHERE Last_Update_Date ='" + incrementaldate + "';"
+	    sql_query = "SELECT "+ columnname + "FROM "+ tablename +" WHERE Last_Update_Date >='" + incrementaldate + "';"
 
 
     cursor.execute(sql_query) 
