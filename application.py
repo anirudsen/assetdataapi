@@ -23,21 +23,36 @@ def getAssetByID():
     mssql_driver = 'ODBC Driver 17 for SQL Server'
     database_server_name = "mdpsqldbserverdev"
     dns = 'testodbc'
+    #-----------------------------------------------------
+    content=request.get_json()
+    tablename=content['tableName']
+    columnname=content['columnName']
+    filtercondition=content['Full']
+    incrementaldate=content['incrementalDate']
+    offset=content['offSet']
+    limit=content['Limit']
+    #-----------------------------------------------------
     cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+mssql_host+';DATABASE='+mssql_db+';UID='+mssql_user+';PWD='+ mssql_pwd)
     cursor = cnxn.cursor()
-    cursor.execute("SELECT * FROM dbo.Device_Data;") 
-    rows = cursor.fetchall()
-    objects_list = []
-    for row in rows:
-        d = collections.OrderedDict()
-        d['DerviceDataUI'] = row.Device_Data_Feed_Unique_Identifier
-        d['AssetID'] = row.Asset_Identifier
-        d['PublishID'] = row.Publisher_Identifier
-        d['LastUpdatedDate'] = row.Last_Update_Date
-        objects_list.append(d)
+    sql_query = " "
+    if filtercondition == '*' and columnname == ' ' and incrementaldate == ' ' :
+    		sql_query = "SELECT * from "+tablename +";"
 
-    #j = json.dumps(objects_list,myconverter)
-    return jsonify(objects_list)
+    if filtercondition == ' ' and columnname != ' ' and incrementaldate == ' ':
+	    sql_query = "SELECT "+ columnname + " "+"from "+tablename +";"
+		
+    if filtercondition == '*' and columnname == ' ' and incrementaldate !=' ' :
+		#"SELECT * FROM dbo.Device_Data WHERE Last_Update_Date ='" + dateval + "';"
+	    sql_query = "SELECT * FROM "+ tablename +" WHERE Last_Update_Date ='" + incrementaldate + "';"
+		
+    if filtercondition == ' ' and columnname != ' ' and incrementaldate !=' ':
+	    sql_query = "SELECT "+ columnname + "FROM "+ tablename +" WHERE Last_Update_Date ='" + incrementaldate + "';"
+
+
+    cursor.execute(sql_query) 
+    rows = cursor.fetchall()
+#j = json.dumps(objects_list,myconverter)
+    return jsonify(rows)
 
 
 @app.route('/incremental')
@@ -50,7 +65,7 @@ def getAssetByAssets():
     mssql_driver = 'ODBC Driver 17 for SQL Server'
     database_server_name = "mdpsqldbserverdev"
     dns = 'testodbc'
-    dateval = request.args.get('date', '')
+    dateval = request.get_.args.get('date', '')
     cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+mssql_host+';DATABASE='+mssql_db+';UID='+mssql_user+';PWD='+ mssql_pwd)
     cursor = cnxn.cursor()
     date_time_obj = datetime.datetime.strptime(dateval, '%Y-%m-%d')
