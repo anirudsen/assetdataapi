@@ -62,7 +62,7 @@ def getAssetByID():
     print(songs)
 
 #j = json.dumps(objects_list,myconverter)
-    return jsonify(songs)
+    return jsonify(sql_query)
 
 
 @app.route('/incremental')
