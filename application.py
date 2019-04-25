@@ -55,10 +55,10 @@ def getAssetByID():
     cols = [x[0] for x in cursor.description]
     songs = []
     for row in rows:
-     song = {}
-    for prop, val in zip(cols, row):
-        song[prop] = val
-    songs.append(song)
+        song = {}
+        for prop, val in zip(cols, row):
+            song[prop] = val
+        songs.append(song)
     print(songs)
 
 #j = json.dumps(objects_list,myconverter)
