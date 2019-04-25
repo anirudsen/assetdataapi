@@ -13,8 +13,8 @@ def getwelcomeMsg():
 
 
 
-@app.route('/datapull')
-def getAssetByID():
+@app.route('/retrievedata')
+def getData():
     mssql_host = 'tcp:mdpsqldbserverqc.database.windows.net'
     mssql_db = 'mdp'
     mssql_user = 'appadmin'
