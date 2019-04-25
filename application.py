@@ -15,9 +15,9 @@ def getwelcomeMsg():
 
 @app.route('/full')
 def getAssetByID():
-    mssql_host = 'tcp:mdpsqldbserverdev.database.windows.net'
-    mssql_db = 'mdpappdb'
-    mssql_user = 'mdpadmin'
+    mssql_host = 'tcp:mdpsqldbserverqc.database.windows.net'
+    mssql_db = 'mdp'
+    mssql_user = 'appadmin'
     mssql_pwd = 'Robo#2010'
     mssql_port = 1433 
     mssql_driver = 'ODBC Driver 17 for SQL Server'
