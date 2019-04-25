@@ -59,6 +59,7 @@ def getAssetByID():
     for prop, val in zip(cols, row):
         song[prop] = val
     songs.append(song)
+    print(songs)
 
 #j = json.dumps(objects_list,myconverter)
     return jsonify(songs)
