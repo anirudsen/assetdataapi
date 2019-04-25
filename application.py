@@ -32,7 +32,7 @@ def getData():
     offset=content['offSet']
     limit=content['Limit']
     #-----------------------------------------------------
-    cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+mssql_host+';DATABASE='+mssql_db+';UID='+mssql_user+';PWD='+ mssql_pwd)
+    cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+mssql_host+';DATABASE='+mssql_db+';UID='+mssql_user+';PWD='+ mssql_pwd+';Trusted_connection=no')
     cursor = cnxn.cursor()
     sql_query = " "
     if filtercondition == '*' and columnname == ' ' and incrementaldate == ' ' :
