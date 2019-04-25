@@ -50,11 +50,15 @@ def getAssetByID():
 
 
     cursor.execute(sql_query) 
-    rows = cursor.fetchall()
-    rec = [ dict(rec) for rec in rows ]
+    #rows = cursor.fetchall()
+    columns = [column[0] for column in cursor.description]
+    results = []
+    for row in cursor.fetchall():
+        results.append(dict(zip(columns, row)))
+    #rec = [ dict(rec) for rec in rows ]
 
 #j = json.dumps(objects_list,myconverter)
-    return jsonify(rec)
+    return jsonify(results)
 
 
 @app.route('/incremental')
