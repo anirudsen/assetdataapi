@@ -39,7 +39,7 @@ def getAssetByID():
     		sql_query = "SELECT * from "+tablename +";"
 
     if filtercondition == ' ' and columnname != ' ' and incrementaldate == ' ':
-	    sql_query = "SELECT "+ columnname + " "+"from "+tablename +";"
+	    sql_query = "SELECT "+ columnname + " "+"FROM "+tablename +";"
 		
     if filtercondition == '*' and columnname == ' ' and incrementaldate !=' ' :
 		#"SELECT * FROM dbo.Device_Data WHERE Last_Update_Date ='" + dateval + "';"
@@ -51,18 +51,10 @@ def getAssetByID():
 
     cursor.execute(sql_query) 
     rows = cursor.fetchall()
-    rows = [x for x in cursor]
-    cols = [x[0] for x in cursor.description]
-    songs = []
-    for row in rows:
-        song = {}
-        for prop, val in zip(cols, row):
-            song[prop] = val
-        songs.append(song)
-    print(songs)
+    rec = [ dict(rec) for rec in rows ]
 
 #j = json.dumps(objects_list,myconverter)
-    return jsonify(sql_query)
+    return jsonify(rec)
 
 
 @app.route('/incremental')
