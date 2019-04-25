@@ -15,8 +15,8 @@ def getwelcomeMsg():
 
 @app.route('/retrievedata')
 def getData():
-    mssql_host = 'tcp:mdpsqldbserverqc.database.windows.net'
-    mssql_db = 'mdp'
+    mssql_host = 'tcp:mdpsqldbserverdev.database.windows.net'
+    mssql_db = 'mdpappdb'
     mssql_user = 'appadmin'
     mssql_pwd = 'Robo#2010#'
     mssql_port = 1433 
