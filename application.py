@@ -13,7 +13,7 @@ def getwelcomeMsg():
 
 
 
-@app.route('/retrievedata')
+@app.route('/v1/iSolveCommandAsset')
 def getData():
     mssql_host = 'tcp:mdpsqldbserverdev.database.windows.net'
     mssql_db = 'mdpappdb'
@@ -32,9 +32,16 @@ def getData():
     offset=content['offSet']
     limit=content['Limit']
     #-----------------------------------------------------
+    
     cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+mssql_host+';DATABASE='+mssql_db+';UID='+mssql_user+';PWD='+ mssql_pwd+';Trusted_connection=no')
     cursor = cnxn.cursor()
     sql_query = " "
+    if filtercondition == '*'  and incrementaldate != ' ' :
+        sql_query = "SELECT * FROM "+ "dbo.iSolve_Asset_Stg" +" WHERE Last_Update_Date >='" + incrementaldate + "';"
+    if filtercondition == '*'  and incrementaldate == ' ' :
+        sql_query = "SELECT * from "+"dbo.iSolve_Asset_Stg ORDER BY ASSET_Identifier" +"OFFSET "+ offset + "FETCH NEXT "+limit+" ROWS ONLY"+";"
+
+    '''
     if filtercondition == '*' and columnname == ' ' and incrementaldate == ' ' :
     		sql_query = "SELECT * from "+tablename +";"
 
@@ -48,7 +55,7 @@ def getData():
     if filtercondition == ' ' and columnname != ' ' and incrementaldate !=' ':
 	    sql_query = "SELECT "+ columnname + "FROM "+ tablename +" WHERE Last_Update_Date >='" + incrementaldate + "';"
 
-
+    '''
     cursor.execute(sql_query) 
     #rows = cursor.fetchall()
     columns = [column[0] for column in cursor.description]
