@@ -13,7 +13,7 @@ def getwelcomeMsg():
 
 
 
-@app.route('/v1/iSolveCommandAsset')
+@app.route('/v1/iSolveCommandAsset',methods=['POST'])
 def getData():
 
     '''
