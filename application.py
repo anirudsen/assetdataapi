@@ -45,7 +45,7 @@ def getData():
     offset=content['offSet']
     limit=content['Limit']
     #------------------------------------------------------------------------- Date
-    '''
+    
     if incrementaldate !=' ':
         data_pre = incrementaldate.strip().split(',')
         stDate = data_pre[0].replace("\"", "")
@@ -58,7 +58,7 @@ def getData():
     mic_sec = dat_time.microsecond
     timcon = calendar.timegm(dat_time.timetuple())*1000000 + mic_sec
     strDate = "\"" + stDate + "\""
-     '''
+    
     #-------------------------------------------------------------------------- Date end
     #-----------------------------------------------------
     
@@ -66,7 +66,8 @@ def getData():
     cursor = cnxn.cursor()
     sql_query = " "
     if filtercondition == '*'  and incrementaldate != ' ' :
-        sql_query = "SELECT * FROM (SELECT *, Row_number() OVER (ORDER BY Asset_Identifier DESC) AS rownum FROM [dbo].iSolve_Asset_Stg)tb1 WHERE rownum between " + offset + "AND " + limit + " AND Last_Update_Date >='2019-04-26 05:55:33.473';"
+        sql_query = "SELECT * FROM (SELECT *, Row_number() OVER (ORDER BY Asset_Identifier DESC) AS rownum FROM [dbo].iSolve_Asset_Stg)tb1 WHERE rownum between " + offset + "AND " + limit + " AND Last_Update_Date >='"+strDate+"';"
+        print(sql_query)
         #sql_query = "SELECT * FROM "+ "dbo.iSolve_Asset_Stg" +" WHERE Last_Update_Date >='" + strDate + "';"
     if filtercondition == '*'  and incrementaldate == ' ' :
         sql_query = "SELECT * FROM (SELECT * , Row_number() OVER (ORDER BY Asset_Identifier DESC) AS rownum FROM [dbo].iSolve_Asset_Stg)tbl WHERE rownum between " + offset + "AND " + limit +";"
