@@ -26,10 +26,10 @@ def getData():
     database_server_name = "mdpsqldbserverdev"
     dns = 'testodbc'
     '''
-    mssql_host = 'tcp:mdpsqldbserverrc.database.windows.net'
+    mssql_host = 'tcp:mdpsqldbserverqc.database.windows.net'
     mssql_db = 'mdp'
     mssql_user = 'appadmin'
-    mssql_pwd = 'Robo#2010#'
+    mssql_pwd = 'Robo#2010'
     mssql_port = 1433 
     mssql_driver = 'ODBC Driver 17 for SQL Server'
     database_server_name = "mdpsqldbserverdev"
@@ -50,7 +50,8 @@ def getData():
     if filtercondition == '*'  and incrementaldate != ' ' :
         sql_query = "SELECT * FROM "+ "dbo.iSolve_Asset_Stg" +" WHERE Last_Update_Date >='" + incrementaldate + "';"
     if filtercondition == '*'  and incrementaldate == ' ' :
-        sql_query = "SELECT * from "+"dbo.iSolve_Asset_Stg ORDER BY ASSET_Identifier" +"OFFSET "+ offset + "FETCH NEXT "+limit+" ROWS ONLY"+";"
+        sql_query = "SELECT * FROM (SELECT * , Row_number() OVER (ORDER BY Asset_Identifier DESC) AS rownum FROM [dbo].iSolve_Asset_Stg)tbl WHERE rownum between " + offset + "AND" + limit +";"
+        #sql_query = "SELECT * from "+"dbo.iSolve_Asset_Stg ORDER BY ASSET_Identifier" +"OFFSET "+ offset + "FETCH NEXT "+limit+" ROWS ONLY"+";"
 
     '''
     if filtercondition == '*' and columnname == ' ' and incrementaldate == ' ' :
