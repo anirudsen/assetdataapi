@@ -42,7 +42,7 @@ def getData():
     incrementaldate=content['incrementalDate']
     offset=content['offSet']
     limit=content['Limit']
-    create_data = datetime.datetime.strptime(incrementaldate, '%Y-%m-%dT%H:%M:%S.%f')
+    create_data = datetime.datetime.strptime(incrementaldate, '%Y-%m-%d %H:%M:%S.%f')
     #-----------------------------------------------------
     
     cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+mssql_host+';DATABASE='+mssql_db+';UID='+mssql_user+';PWD='+ mssql_pwd+';Trusted_connection=no')
