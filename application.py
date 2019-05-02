@@ -45,7 +45,7 @@ def getData():
     offset=content['offSet']
     limit=content['Limit']
     #------------------------------------------------------------------------- Date
-    data_pre = B.strip().split(',')
+    data_pre = incrementaldate.strip().split(',')
     stDate = data_pre[0].replace("\"", "")
     try:
         dat_time = datetime.datetime.strptime(stDate,'%Y-%m-%d %H:%M:%S.%f')
