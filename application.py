@@ -2,6 +2,8 @@ import pyodbc
 import collections
 import json
 import datetime
+import time
+import calendar
 from flask import Flask, request,  jsonify
 
 
@@ -42,14 +44,27 @@ def getData():
     incrementaldate=content['incrementalDate']
     offset=content['offSet']
     limit=content['Limit']
-    create_data = datetime.datetime.strptime(incrementaldate, '%Y-%m-%d %H:%M:%S.%f')
+    #------------------------------------------------------------------------- Date
+    data_pre = B.strip().split(',')
+    stDate = data_pre[0].replace("\"", "")
+    try:
+        dat_time = datetime.datetime.strptime(stDate,'%Y-%m-%d %H:%M:%S.%f')
+    except:
+        stDate = stDate + ".4"
+        dat_time = datetime.datetime.strptime(stDate,'%Y-%m-%d %H:%M:%S.%f')
+
+    mic_sec = dat_time.microsecond
+    timcon = calendar.timegm(dat_time.timetuple())*1000000 + mic_sec
+    strDate = "\"" + stDate + "\""
+     
+    #-------------------------------------------------------------------------- Date end
     #-----------------------------------------------------
     
     cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+mssql_host+';DATABASE='+mssql_db+';UID='+mssql_user+';PWD='+ mssql_pwd+';Trusted_connection=no')
     cursor = cnxn.cursor()
     sql_query = " "
     if filtercondition == '*'  and incrementaldate != ' ' :
-        sql_query = "SELECT * FROM "+ "dbo.iSolve_Asset_Stg" +" WHERE Last_Update_Date >='" + create_data + "';"
+        sql_query = "SELECT * FROM "+ "dbo.iSolve_Asset_Stg" +" WHERE Last_Update_Date >='" + strDate + "';"
     if filtercondition == '*'  and incrementaldate == ' ' :
         sql_query = "SELECT * FROM (SELECT * , Row_number() OVER (ORDER BY Asset_Identifier DESC) AS rownum FROM [dbo].iSolve_Asset_Stg)tbl WHERE rownum between " + offset + "AND " + limit +";"
         #sql_query = "SELECT * from "+"dbo.iSolve_Asset_Stg ORDER BY ASSET_Identifier" +"OFFSET "+ offset + "FETCH NEXT "+limit+" ROWS ONLY"+";"
