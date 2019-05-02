@@ -38,8 +38,8 @@ def getData():
     dns = 'testodbc'
     #-----------------------------------------------------
     content=request.get_json()
-    tablename=content['tableName']
-    columnname=content['columnName']
+    #tablename=content['tableName']
+    #columnname=content['columnName']
     filtercondition=content['Full']
     incrementaldate=content['incrementalDate']
     offset=content['offSet']
