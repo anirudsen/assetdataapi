@@ -66,7 +66,7 @@ def getData():
     cursor = cnxn.cursor()
     sql_query = " "
     if filtercondition == '*'  and incrementaldate != ' ' :
-        sql_query = "select * from (select *, Row_number() OVER (ORDER BY Asset_Identifier DESC) AS rownum [dbo].iSolve_Asset_Stg WHERE rownum between " + offset + "AND " + limit + " AND Last_Update_Date >='2019-04-26 05:55:33.473';"
+        sql_query = "select * from (select *, Row_number() OVER (ORDER BY Asset_Identifier DESC) AS rownum dbo.iSolve_Asset_Stg WHERE rownum between " + offset + "AND " + limit + " AND Last_Update_Date >='2019-04-26 05:55:33.473';"
         #sql_query = "SELECT * FROM "+ "dbo.iSolve_Asset_Stg" +" WHERE Last_Update_Date >='" + strDate + "';"
     if filtercondition == '*'  and incrementaldate == ' ' :
         sql_query = "SELECT * FROM (SELECT * , Row_number() OVER (ORDER BY Asset_Identifier DESC) AS rownum FROM [dbo].iSolve_Asset_Stg)tbl WHERE rownum between " + offset + "AND " + limit +";"
